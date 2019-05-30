@@ -37,14 +37,12 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong> who lives and works in New
-              York building useful things.
+              Written by <strong>{author}</strong> who lives, runs, and works in
+              New York building useful things with data.
               {` `}
               <a href={`https://twitter.com/${social.twitter}`}>
                 You should follow him on Twitter
               </a>
-              <br />
-              <a>Read more about Patrick here</a>
             </p>
           </div>
         )

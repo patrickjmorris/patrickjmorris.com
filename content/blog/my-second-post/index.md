@@ -1,6 +1,7 @@
 ---
-title: My Second Post!
+title: Most technical blogs just copy other's code
 date: "2015-05-06T23:46:37.121Z"
+description: Very little original material seems to be showing up lately in the data blogging worlds.
 ---
 
 Wow! I love blogging so much already.

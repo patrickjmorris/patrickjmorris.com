@@ -1,7 +1,7 @@
 ---
-title: New Beginnings
+title: While data go thru a javascript framework phase?
 date: "2015-05-28T22:40:32.169Z"
-description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.
+description: As the growth of the data field continues, will we see a similar rise of data frameworks like we did with Javascript?
 ---
 
 Far far away, behind the word mountains, far from the countries Vokalia and
