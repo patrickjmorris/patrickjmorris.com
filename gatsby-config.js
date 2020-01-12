@@ -1,3 +1,4 @@
+require("dotenv").config()
 module.exports = {
   siteMetadata: {
     title: `Patrick Morris`,
@@ -68,12 +69,20 @@ module.exports = {
         icon: `content/assets/gatsby-icon.png`,
       },
     },
-    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: "gatsby-source-strava",
+      options: {
+        id: process.env.STRAVA_CLIENT_ID,
+        secret: process.env.STRAVA_CLIENT_SECRET,
+        refresh_token: process.env.STRAVA_REFRESH_TOKEN,
+        redirect_uri: process.env.STRAVA_REDIRECT_URI,
       },
     },
   ],
