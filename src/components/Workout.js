@@ -6,7 +6,7 @@ const Workout = ({ workout }) => {
     <li className="card">
       <h3>{workout.name}</h3>
       <p>{new Date(workout.start_date).toLocaleDateString()}</p>
-      {workout.kudos_count > 0 && <p>{workout.kudos_count}x</p>}
+      {workout.kudos_count > 0 && <p>{workout.kudos_count}xKudos</p>}
     </li>
   )
 }
