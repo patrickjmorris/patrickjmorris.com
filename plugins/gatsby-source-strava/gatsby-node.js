@@ -1,17 +1,4 @@
-const axios = require("axios")
 
-const getAccessToken = config => {
-  return axios
-    .post(`https://www.strava.com/oauth/token`, {
-      grant_type: "refresh_token",
-      refresh_token: config.refresh_token,
-      client_id: config.id,
-      client_secret: config.secret,
-    })
-    .catch(err => {
-      throw err
-    })
-}
 
 const processWorkout = (workout, createNodeId, createContentDigest) => {
   return Object.assign({}, workout, {
@@ -26,33 +13,105 @@ const processWorkout = (workout, createNodeId, createContentDigest) => {
   })
 }
 
+// exports.sourceNodes = async (
+//   { actions, createNodeId, createContentDigest },
+//   configOptions
+// ) => {
+//   const { createNode } = actions
+//   const response = await getAccessToken(configOptions)
+
+//   const strava = require("strava")({
+//     access_token: response.data.access_token,
+//     client_id: configOptions.id,
+//     client_secret: configOptions.secret,
+//     redirect_uri: configOptions.redirect_uri,
+//   })
+
+//   return new Promise((resolve, reject) => {
+//     strava.athlete.activities.get((err, res) => {
+//       if (err) reject(err)
+
+//       res.forEach(workout => {
+//         const nodeData = processWorkout(
+//           workout,
+//           createNodeId,
+//           createContentDigest
+//         )
+//         createNode(nodeData)
+//       })
+//       resolve()
+//     })
+//   })
+// }
+
 exports.sourceNodes = async (
-  { actions, createNodeId, createContentDigest },
-  configOptions
+  { actions: { createNode } },
+  { activitiesOptions, athleteOptions, debug, token }
 ) => {
-  const { createNode } = actions
-  const response = await getAccessToken(configOptions)
+  if (!token) {
+    throw new Error("source-strava: Missing API token")
+  }
 
-  const strava = require("strava")({
-    access_token: response.data.access_token,
-    client_id: configOptions.id,
-    client_secret: configOptions.secret,
-    redirect_uri: configOptions.redirect_uri,
-  })
-
-  return new Promise((resolve, reject) => {
-    strava.athlete.activities.get((err, res) => {
-      if (err) reject(err)
-
-      res.forEach(workout => {
-        const nodeData = processWorkout(
-          workout,
-          createNodeId,
-          createContentDigest
-        )
-        createNode(nodeData)
-      })
-      resolve()
+  try {
+    let heartrateMax
+    const activities = await getActivities({
+      debug,
+      options: {
+        ...activitiesOptions,
+      },
+      token,
     })
-  })
+
+    if (activities && activities.length > 0) {
+      activities.forEach(activity => {
+        if (athleteOptions.computeHeartrateMax && activity.has_heartrate) {
+          if (!heartrateMax || activity.max_heartrate > heartrateMax) {
+            heartrateMax = activity.max_heartrate
+          }
+        }
+
+        createNode({
+          activity,
+          id: `Strava Activity: ${activity.id}`,
+          parent: "__SOURCE__",
+          children: [],
+          internal: {
+            type: "StravaActivity",
+            contentDigest: crypto
+              .createHash("md5")
+              .update(JSON.stringify(activity))
+              .digest("hex"),
+          },
+        })
+      })
+    }
+
+    const athlete = await getAthlete({
+      token,
+      options: athleteOptions,
+    })
+
+    createNode({
+      athlete: {
+        ...athlete,
+        ...(athleteOptions.computeheartrateMax ? { heartrateMax } : {}),
+      },
+      id: `Strava Athlete: ${athlete.id}`,
+      parent: "__SOURCE__",
+      children: [],
+      internal: {
+        type: "StravaAthlete",
+        contentDigest: crypto
+          .createHash("md5")
+          .update(JSON.stringify(athlete))
+          .digest("hex"),
+      },
+    })
+  } catch (e) {
+    if (debug) {
+      // eslint-disable-next-line
+      console.error(e)
+    }
+    throw new Error(`source-strava: ${e.message}`)
+  }
 }
