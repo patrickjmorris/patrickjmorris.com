@@ -85,5 +85,6 @@ module.exports = {
         redirect_uri: process.env.STRAVA_REDIRECT_URI,
       },
     },
+    'gatsby-plugin-theme-ui'
   ],
 }
