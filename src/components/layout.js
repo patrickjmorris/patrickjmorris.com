@@ -3,9 +3,8 @@ import { Link } from "gatsby"
 
 import { rhythm, scale } from "../utils/typography"
 
-class Layout extends React.Component {
-  render() {
-    const { location, title, children } = this.props
+const Layout = ({location, title, children}) => {
+    
     const rootPath = `${__PATH_PREFIX__}/`
     let header
 
@@ -70,6 +69,5 @@ class Layout extends React.Component {
       </div>
     )
   }
-}
 
 export default Layout

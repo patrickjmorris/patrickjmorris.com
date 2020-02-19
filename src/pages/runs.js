@@ -5,22 +5,19 @@ import Workout from "../components/Workout"
 
 // TODO: Separate workouts from runs
 // TODO: Add filtering sorting
-class RunIndex extends React.Component {
-  render() {
-    const { data } = this.props
-    const siteTitle = data.site.siteMetadata.title
-    const runs = data.allStravaWorkout.edges
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <h1>Exercise</h1>
-        <ol className="card-list">
-          {runs.map(({ node: workout }) => (
-            <Workout key={workout.id} workout={workout} />
-          ))}
-        </ol>
-      </Layout>
-    )
-  }
+const RunIndex = ({ data, location }) => {
+  const siteTitle = data.site.siteMetadata.title
+  const runs = data.allStravaWorkout.edges
+  return (
+    <Layout location={location} title={siteTitle}>
+      <h1>Exercise</h1>
+      <ol className="card-list">
+        {runs.map(({ node: workout }) => (
+          <Workout key={workout.id} workout={workout} />
+        ))}
+      </ol>
+    </Layout>
+  )
 }
 
 export default RunIndex
