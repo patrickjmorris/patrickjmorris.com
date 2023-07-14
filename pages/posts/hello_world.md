@@ -7,4 +7,4 @@ tag:
 
 # Hello World
 
-I've spent the majority of the past 2 years consuming a lot of content. Blog posts, Twitter, Instagram, Strava, and now Web3/Crypto content. I loved being informed on a wide variety of topics, but also struggle to be creative and synthesize all I'm learning. I'll try to use this space mainly for myself, and make available for others who may find it of interest.
+I'm a (relatively) new dad, and thought I would have time to some time to work on some side projects at night...that hasn't really been the case but let's see how things go. 
