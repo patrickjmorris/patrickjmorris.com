@@ -1,0 +1,9 @@
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles using Tailwind's @apply */
+body {
+  @apply bg-white;
+}
