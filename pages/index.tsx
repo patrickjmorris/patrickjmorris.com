@@ -54,7 +54,7 @@ export default function Home() {
               "description": "Data analytics leader with over 12 years of experience at companies like Disney and The New York Times.",
               "sameAs": [
                 "https://github.com/patrickjmorris",
-                "https://linkedin.com/in/patrickjmorris"
+                "https://linkedin.com/in/patrickjohnmorris"
               ]
             })
           }}
