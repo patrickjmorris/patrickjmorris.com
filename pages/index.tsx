@@ -99,7 +99,7 @@ export default function Home() {
                   GitHub
                 </a>
                 <a 
-                  href="https://linkedin.com/in/patrickjmorris" 
+                  href="https://linkedin.com/in/patrickjohnmorris" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="px-6 py-2.5 text-sm font-sans bg-[#8B0000] text-[#F3EFE0] hover:bg-opacity-90 transition-colors uppercase tracking-wider font-medium rounded-md"
