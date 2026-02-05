@@ -1,0 +1,38 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Patrick Morris | Data Leader &amp; Analytics Professional</title>
+  <desc id="desc">Social sharing card for Patrick Morris personal website.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F3EFE0"/>
+      <stop offset="1" stop-color="#E6DECB"/>
+    </linearGradient>
+    <radialGradient id="accent" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1060 70) rotate(131.987) scale(560 460)">
+      <stop stop-color="#8B0000" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#8B0000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#accent)"/>
+
+  <rect x="80" y="80" width="1040" height="470" rx="28" fill="#FFFFFF" fill-opacity="0.52" stroke="#0F2C4D" stroke-opacity="0.22"/>
+
+  <text x="140" y="210" fill="#0F2C4D" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="64" font-weight="600" letter-spacing="0.8">
+    Patrick Morris
+  </text>
+
+  <text x="140" y="280" fill="#8B0000" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="32" font-weight="500" letter-spacing="1.4">
+    Data Leader &amp; Analytics Professional
+  </text>
+
+  <text x="140" y="360" fill="#1E3D62" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="28" font-weight="400">
+    Streaming growth, retention strategy, experimentation at scale
+  </text>
+
+  <g transform="translate(140 430)">
+    <rect width="310" height="68" rx="12" fill="#0F2C4D"/>
+    <text x="155" y="43" text-anchor="middle" fill="#F3EFE0" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="22" font-weight="600" letter-spacing="0.8">
+      patrickjmorris.com
+    </text>
+  </g>
+</svg>
