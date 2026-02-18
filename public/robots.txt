@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://patrickjmorris.com/sitemap.xml
+Host: patrickjmorris.com

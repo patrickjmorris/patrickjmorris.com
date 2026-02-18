@@ -1,6 +1,10 @@
 {
   "name": "Patrick Morris | Data Leader",
   "short_name": "Patrick Morris",
+  "description": "Personal website of Patrick Morris, data analytics leader focused on subscription growth and experimentation.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -14,6 +18,6 @@
     }
   ],
   "theme_color": "#F3EFE0",
-  "background_color": "#ffffff",
+  "background_color": "#F3EFE0",
   "display": "standalone"
 }

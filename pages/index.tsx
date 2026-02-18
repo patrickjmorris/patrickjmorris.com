@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { KeyboardEvent, useState } from 'react';
-import { personJsonLd, siteMeta, toAbsoluteUrl } from '../lib/site-meta';
+import { siteMeta, structuredDataGraph, toAbsoluteUrl } from '../lib/site-meta';
 
 const highlights = [
   {
@@ -67,6 +67,27 @@ const availabilityDetails = [
   }
 ];
 
+const faqItems = [
+  {
+    question: 'What kinds of analytics leadership roles is Patrick Morris open to?',
+    answer:
+      'Patrick is open to full-time analytics leadership roles and select advisory engagements focused on subscription growth, retention, and experimentation.'
+  },
+  {
+    question: 'What industries and products has Patrick Morris worked on?',
+    answer:
+      'Patrick has led analytics and product work at Disney and ESPN+ for sports streaming and at The New York Times for digital subscriptions and experimentation.'
+  },
+  {
+    question: 'Where is Patrick Morris based?',
+    answer: 'Patrick is based in Brooklyn, New York, and works with teams across US time zones.'
+  },
+  {
+    question: 'How can I contact Patrick Morris about analytics consulting or hiring?',
+    answer: `Use the contact section on this page, send an email to ${siteMeta.email}, or connect on LinkedIn.`
+  }
+];
+
 const casualBio = [
   'Hey there, I\'m Patrick. I\'m currently spending lots of time with my two amazing boys while figuring out what\'s next professionally.',
   'I call Carroll Gardens, Brooklyn home, where you\'ll usually find me chasing my kids around a playground or posted up at a local cafe or pizza spot.',
@@ -97,6 +118,18 @@ const professionalSections = [
 export default function Home() {
   const [isProfessional, setIsProfessional] = useState(false);
   const activeTab = isProfessional ? 'professional' : 'casual';
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  };
 
   const commonButtonClasses =
     'rounded-md px-6 py-2.5 text-sm font-sans uppercase tracking-wider font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0F2C4D]';
@@ -144,31 +177,54 @@ export default function Home() {
         <meta name="description" content={siteMeta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="author" content={siteMeta.name} />
+        <meta name="creator" content={siteMeta.name} />
+        <meta name="publisher" content={siteMeta.name} />
+        <meta name="application-name" content={siteMeta.siteName} />
+        <meta name="geo.region" content={siteMeta.region} />
+        <meta name="geo.placename" content={siteMeta.location} />
+        <meta name="referrer" content="origin-when-cross-origin" />
+        <link rel="icon" href="/favicon-32x32.png" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={siteMeta.name} />
+        <meta property="og:site_name" content={siteMeta.siteName} />
+        <meta property="og:locale" content={siteMeta.locale} />
         <meta property="og:url" content={toAbsoluteUrl(siteMeta.path)} />
         <meta property="og:title" content={siteMeta.title} />
         <meta property="og:description" content={siteMeta.shortDescription} />
         <meta property="og:image" content={toAbsoluteUrl(siteMeta.socialImage)} />
+        <meta property="og:image:secure_url" content={toAbsoluteUrl(siteMeta.socialImage)} />
         <meta property="og:image:type" content={siteMeta.socialImageType} />
         <meta property="og:image:width" content={`${siteMeta.socialImageWidth}`} />
         <meta property="og:image:height" content={`${siteMeta.socialImageHeight}`} />
         <meta property="og:image:alt" content={`${siteMeta.name} social card`} />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:site" content={siteMeta.twitterHandle} />
-        <meta property="twitter:url" content={toAbsoluteUrl(siteMeta.path)} />
-        <meta property="twitter:title" content={siteMeta.title} />
-        <meta property="twitter:description" content={siteMeta.shortDescription} />
-        <meta property="twitter:image" content={toAbsoluteUrl(siteMeta.socialImage)} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content={siteMeta.twitterHandle} />
+        <meta name="twitter:creator" content={siteMeta.twitterHandle} />
+        <meta name="twitter:url" content={toAbsoluteUrl(siteMeta.path)} />
+        <meta name="twitter:title" content={siteMeta.title} />
+        <meta name="twitter:description" content={siteMeta.shortDescription} />
+        <meta name="twitter:image" content={toAbsoluteUrl(siteMeta.socialImage)} />
         <meta name="twitter:image:alt" content={`${siteMeta.name} social card`} />
         <meta name="keywords" content={siteMeta.keywords} />
         <link rel="canonical" href={toAbsoluteUrl(siteMeta.path)} />
+        <link rel="alternate" hrefLang="en-US" href={toAbsoluteUrl(siteMeta.path)} />
+        <link rel="alternate" hrefLang="x-default" href={toAbsoluteUrl(siteMeta.path)} />
+        <link rel="me" href={siteMeta.githubUrl} />
+        <link rel="me" href={siteMeta.linkedinUrl} />
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted data
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personJsonLd)
+            __html: JSON.stringify(structuredDataGraph)
+          }}
+        />
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted data
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqJsonLd)
           }}
         />
       </Head>
@@ -368,6 +424,20 @@ export default function Home() {
                 <div key={item.label}>
                   <dt className="mb-1 font-sans text-xs uppercase tracking-wider text-[#0F2C4D]/70">{item.label}</dt>
                   <dd className="font-sans text-sm leading-relaxed text-[#4A4A4A]">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          <section aria-labelledby="faq-heading" className="mb-14 rounded-lg border border-[#0F2C4D]/15 bg-white/60 p-6 md:p-8">
+            <h2 id="faq-heading" className="mb-4 font-serif text-2xl tracking-wide">
+              Frequently Asked Questions
+            </h2>
+            <dl className="space-y-4 font-sans text-[#4A4A4A]">
+              {faqItems.map((item) => (
+                <div key={item.question}>
+                  <dt className="font-medium text-[#0F2C4D]">{item.question}</dt>
+                  <dd className="mt-1 leading-relaxed">{item.answer}</dd>
                 </div>
               ))}
             </dl>
