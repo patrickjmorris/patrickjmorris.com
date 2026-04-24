@@ -13,7 +13,7 @@
         "next": "16.1.6",
         "nextra": "^4.6.1",
         "nextra-theme-blog": "^4.6.1",
-        "postcss": "^8.4.31",
+        "postcss": "^8.5.10",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "rss": "^1.2.2",
